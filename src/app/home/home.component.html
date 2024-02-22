@@ -1,5 +1,6 @@
-<div class="column">
-  <div class="row wrap gap-1 space-between">
+<div class="column gap-1">
+  <!-- Product section -->
+  <div class="row wrap gap-1">
     @for(product of products; track product.name){
     <app-product
       [product]="product"
@@ -7,4 +8,11 @@
     ></app-product>
     }
   </div>
+  <!-- Paginator -->
+  <p-paginator
+    [rows]="rows"
+    [totalRecords]="totalrecords"
+    [rowsPerPageOptions]="[5, 10, 15, 20]"
+    (onPageChange)="onPageChange($event)"
+  ></p-paginator>
 </div>
