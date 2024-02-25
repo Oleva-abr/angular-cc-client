@@ -1,10 +1,19 @@
 <div class="column gap-1">
+  <!-- Add Product Button  -->
+  <button
+    type="button"
+    pButton
+    icon="pi pi-plus"
+    (click)="toggleAddPopup()"
+    label="Add Product"
+  ></button>
   <!-- Product section -->
   <div class="row wrap gap-1">
     @for(product of products; track product.name){
     <app-product
       [product]="product"
-      (productOutput)="onProductOutput($event)"
+      (edit)="toggleEditPopup($event)"
+      (delete)="toggleDeletepopup($event)"
     ></app-product>
     }
   </div>
@@ -19,13 +28,13 @@
 <!-- Edit Product -->
 <app-edit-popup
   [product]="selectedProduct"
-  [display]="displayEditPopup"
+  [(display)]="displayEditPopup"
   (confirm)="onConfirmEdit($event)"
   header="Edit Product"
 ></app-edit-popup>
 <!-- Add Product -->
 <app-edit-popup
-  [display]="displayAddPopup"
+  [(display)]="displayAddPopup"
   (confirm)="onConfirmAdd($event)"
   header="Add Product"
 ></app-edit-popup>
