@@ -2,17 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { Product } from '../../../types';
+import { FormsModule } from '@angular/forms';
+import { RatingModule } from 'primeng/rating';
 @Component({
   selector: 'app-edit-popup',
   standalone: true,
-  imports: [DialogModule, CommonModule],
+  imports: [DialogModule, CommonModule, FormsModule, RatingModule],
   templateUrl: './edit-popup.component.html',
   styleUrl: './edit-popup.component.scss'
 })
 export class EditPopupComponent {
   @Input() display: boolean = false;
-  @Output() confirm = new EventEmitter<Product>()
-  @Output() cancel = new EventEmitter<void>()
+
+  @Input() header!: string;
 
 
   @Input() product: Product = {
@@ -21,6 +23,10 @@ export class EditPopupComponent {
     price: '',
     rating: 0,
   }
+
+
+  @Output() confirm = new EventEmitter<Product>();
+  @Output() cancel = new EventEmitter<void>();
 
   onConfirm() {
     this.confirm.emit(this.product);
