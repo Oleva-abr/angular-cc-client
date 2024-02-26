@@ -11,7 +11,7 @@
     iconCancelClass="hidden"
   ></p-rating>
 
-  <div class="row">
+  <div class="row gap-05">
     <button
       type="button"
       pButton
@@ -23,8 +23,12 @@
       type="button"
       pButton
       icon="pi pi-trash"
-      (click)="deleteProduct()"
+      (click)="confirmDelete()"
       label="Delete"
+      class="p-button-danger"
+      #deleteButton
     ></button>
   </div>
 </div>
+
+<p-confirmPopup></p-confirmPopup>
