@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product, Products } from '../../types';
 import { ProductComponent } from '../components/product/product.component';
 import { CommonModule } from '@angular/common';
-import { PaginatorModule } from 'primeng/paginator';
+import { Paginator, PaginatorModule } from 'primeng/paginator';
 
 import { EditPopupComponent } from '../components/edit-popup/edit-popup.component';
 
@@ -20,6 +20,9 @@ export class HomeComponent {
     private productsService: ProductService
   ) { }
 
+  @ViewChild('paginator') paginator: Paginator | undefined;
+
+
   products: Product[] = [];
   totalrecords: number = 0;
   rows: number = 5;
@@ -32,7 +35,9 @@ export class HomeComponent {
     this.displayEditPopup = true;
   }
 
-  toggleDeletepopup(product: Product) { }
+  toggleDeletepopup(product: Product) {
+    this.deleteProduct(product.id ?? 0);
+  }
 
 
   toggleAddPopup() {
@@ -67,6 +72,10 @@ export class HomeComponent {
   }
 
 
+  resetPaginator() {
+    this.paginator?.changePage(0);
+  }
+
   fetchProducts(page: number, perPage: number) {
     this.productsService.getProducts('http://localhost:3000/clothes', { page, perPage })
       .subscribe({
@@ -84,6 +93,7 @@ export class HomeComponent {
         next: (data) => {
           console.log(data);
           this.fetchProducts(0, this.rows);
+          this.resetPaginator();
         },
         error: (error) => console.log(error),
       })
@@ -95,6 +105,7 @@ export class HomeComponent {
         next: (data) => {
           console.log(data);
           this.fetchProducts(0, this.rows);
+          this.resetPaginator();
         },
         error: (error) => console.log(error),
       })
@@ -106,6 +117,7 @@ export class HomeComponent {
         next: (data) => {
           console.log(data);
           this.fetchProducts(0, this.rows);
+          this.resetPaginator();
         },
         error: (error) => console.log(error),
       })
