@@ -6,9 +6,10 @@
     icon="pi pi-plus"
     (click)="toggleAddPopup()"
     label="Add Product"
+    class="add-product-btn"
   ></button>
   <!-- Product section -->
-  <div class="row wrap gap-1">
+  <div class="row wrap gap-2 space-between">
     @for(product of products; track product.name){
     <app-product
       [product]="product"

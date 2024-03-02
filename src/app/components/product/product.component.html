@@ -1,9 +1,9 @@
 <div class="column gap-1 wrapper">
   <img [src]="product.image" alt="product thumbail" />
-  <h2 class="title">{{ product.name }}</h2>
+  <h2 class="title">{{ product.name | truncateName : 16 : "..." }}</h2>
   <div class="row">
     <span class="price-label">Price:</span>
-    <span class="price">{{ product.price }}</span>
+    <span class="price">{{ product.price | price }}</span>
   </div>
   <p-rating
     [(ngModel)]="product.rating"

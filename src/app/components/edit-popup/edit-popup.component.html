@@ -5,26 +5,27 @@
   [closable]="false"
 >
   <!-- Name -->
-  <div class="column gap-1">
+  <div class="column gap-1 form-wrapper" [formGroup]="productForm">
     <div class="row gap-05">
       <span class="price-label">Name:</span>
-      <input type="text" [(ngModel)]="product.name" />
+      <input type="text" formControlName="name" />
     </div>
     <!-- Price  -->
     <div class="row gap-05">
       <span class="price-label">Price:</span>
-      <input type="text" [(ngModel)]="product.price" />
+      <input type="text" formControlName="price" />
     </div>
     <!-- Image  -->
     <div class="row gap-05">
       <span class="price-label">Image:</span>
-      <input type="text" [(ngModel)]="product.image" />
+      <input type="text" formControlName="image" />
     </div>
     <!-- rating -->
     <p-rating
-      [(ngModel)]="product.rating"
+      formControlName="rating"
       [readonly]="false"
       iconCancelClass="hidden"
+      class="rating"
     ></p-rating>
   </div>
   <p-footer>
@@ -34,6 +35,7 @@
       icon="pi pi-check"
       (click)="onConfirm()"
       label="Confirm"
+      [class.disabled]="!productForm.valid"
     ></button>
     <button
       type="button"
